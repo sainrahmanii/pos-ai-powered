@@ -15,6 +15,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  @override
+  void dispose() {
+    debugPrint('🔥 MainScreen disposed');
+    super.dispose();
+  }
+
   late final CartUseCase cart;
 
   DrawerMenu _currentMenu = DrawerMenu.home;

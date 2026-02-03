@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pos_ai_powered/features/auth/presentation/pages/sign_in.dart';
 import 'package:pos_ai_powered/main_screen.dart';
 import 'package:pos_ai_powered/utils/color_constant.dart';
 
@@ -73,13 +72,7 @@ class AppDrawer extends StatelessWidget {
                   iconFill: Icons.logout,
                   onTap: () async {
                     await FirebaseAuth.instance.signOut();
-
-                    if (!context.mounted) return;
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => SignIn()),
-                      (_) => false,
-                    );
+                    debugPrint('berhasil logout');
                   },
                 ),
               ],
