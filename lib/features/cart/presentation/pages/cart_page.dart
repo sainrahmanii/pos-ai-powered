@@ -4,9 +4,9 @@ import 'package:pos_ai_powered/features/cart/models/cart_product.dart';
 import 'package:pos_ai_powered/features/cart/presentation/widgets/choice_container.dart';
 import 'package:pos_ai_powered/features/cart/presentation/widgets/choice_payment.dart';
 import 'package:pos_ai_powered/features/cart/presentation/widgets/item_cart.dart';
+import 'package:pos_ai_powered/features/cart/presentation/widgets/order_summary.dart';
 import 'package:pos_ai_powered/features/cart/use_cases/cart_use_case.dart';
 import 'package:pos_ai_powered/utils/color_constant.dart';
-import 'package:styled_divider/styled_divider.dart';
 
 class CartPage extends StatefulWidget {
   final Map<int, CartProduct> cartItems;
@@ -77,7 +77,7 @@ class _CartPageState extends State<CartPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ChoicePayment(
-                        icon: Icons.attach_money_rounded,
+                        icon: Icons.euro_rounded,
                         label: "CASH",
                         selected: _paymentType == "cash",
                         onTap: () => setState(() => _paymentType = "cash"),
@@ -161,110 +161,7 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Container(
-              height: 300,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(48),
-                  topRight: Radius.circular(48),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                spacing: 12,
-                children: [
-                  Text(
-                    "Order Summary",
-                    style: GoogleFonts.plusJakartaSans(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Column(
-                    spacing: 12,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Item total",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            "Rp $subTotal",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Tax    (10%)",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            "Rp $tax",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      StyledDivider(
-                        color: Colors.grey[350],
-                        thickness: 2,
-                        lineStyle: DividerLineStyle.dashed,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Total",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            "Rp $total",
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorConstant.primary,
-                      foregroundColor: Colors.white,
-                      minimumSize: Size(double.infinity, 48),
-                      elevation: 0,
-                    ),
-                    child: Text("Proceed Transactions"),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          OrderSummary(subTotal: subTotal, tax: tax, total: total),
         ],
       ),
     );

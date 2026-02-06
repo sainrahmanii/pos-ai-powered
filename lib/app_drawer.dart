@@ -41,6 +41,14 @@ class AppDrawer extends StatelessWidget {
                   onTap: () => onMenuSelected(DrawerMenu.products),
                 ),
                 _DrawerItem(
+                  menu: DrawerMenu.category,
+                  currentMenu: currentMenu,
+                  title: 'Categories',
+                  iconOutline: Icons.label_important_outline_rounded,
+                  iconFill: Icons.label_important_rounded,
+                  onTap: () => onMenuSelected(DrawerMenu.category),
+                ),
+                _DrawerItem(
                   menu: DrawerMenu.transaction,
                   currentMenu: currentMenu,
                   title: 'Transactions',

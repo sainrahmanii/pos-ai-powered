@@ -5,7 +5,15 @@ import 'package:pos_ai_powered/features/cart/use_cases/cart_use_case.dart';
 import 'package:pos_ai_powered/features/home/body.dart';
 import 'package:pos_ai_powered/features/product/presentation/pages/product_page.dart';
 
-enum DrawerMenu { home, products, transaction, aiReport, profile, logout }
+enum DrawerMenu {
+  home,
+  products,
+  category,
+  transaction,
+  aiReport,
+  profile,
+  logout,
+}
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -32,6 +40,8 @@ class _MainScreenState extends State<MainScreen> {
         return "POS - AI Powered";
       case DrawerMenu.products:
         return "Products";
+      case DrawerMenu.category:
+        return "Categories";
       case DrawerMenu.transaction:
         return "Transactions";
       case DrawerMenu.aiReport:
@@ -49,6 +59,8 @@ class _MainScreenState extends State<MainScreen> {
         return const Body();
       case DrawerMenu.products:
         return const ProductPage();
+      case DrawerMenu.category:
+        return const Center(child: Text("Halaman Kategori"));
       case DrawerMenu.transaction:
         return const Center(child: Text("Halaman Transaksi"));
       case DrawerMenu.aiReport:
