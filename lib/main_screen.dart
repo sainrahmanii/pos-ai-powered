@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pos_ai_powered/app_drawer.dart';
 import 'package:pos_ai_powered/features/cart/use_cases/cart_use_case.dart';
+import 'package:pos_ai_powered/features/category/presentation/pages/category_page.dart';
 import 'package:pos_ai_powered/features/home/body.dart';
 import 'package:pos_ai_powered/features/product/presentation/pages/product_page.dart';
+import 'package:pos_ai_powered/features/profile/presentation/pages/profile_page.dart';
+import 'package:pos_ai_powered/features/transaction/presentation/pages/transaction_page.dart';
 
 enum DrawerMenu {
   home,
@@ -60,13 +63,13 @@ class _MainScreenState extends State<MainScreen> {
       case DrawerMenu.products:
         return const ProductPage();
       case DrawerMenu.category:
-        return const Center(child: Text("Halaman Kategori"));
+        return const CategoryPage();
       case DrawerMenu.transaction:
-        return const Center(child: Text("Halaman Transaksi"));
+        return const TransactionPage();
       case DrawerMenu.aiReport:
         return const Center(child: Text("Halaman AI Report"));
       case DrawerMenu.profile:
-        return const Center(child: Text("Halaman Profil"));
+        return ProfilePage();
       case DrawerMenu.logout:
         return const Center(child: CircularProgressIndicator());
     }

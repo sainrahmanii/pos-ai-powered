@@ -19,6 +19,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   late Map<int, CartProduct> _cartItems;
   late final CartUseCase _cartUseCase;
+  late final TextEditingController _textCustomerController;
   String _orderType = "dinein";
   String _paymentType = "qris";
 
@@ -27,6 +28,13 @@ class _CartPageState extends State<CartPage> {
     super.initState();
     _cartItems = widget.cartItems;
     _cartUseCase = CartUseCase();
+    _textCustomerController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _textCustomerController.dispose();
+    super.dispose();
   }
 
   @override
@@ -97,6 +105,7 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                   TextField(
+                    controller: _textCustomerController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(6),
                       hintText: "Customer Name...",
@@ -161,7 +170,18 @@ class _CartPageState extends State<CartPage> {
               ),
             ),
           ),
-          OrderSummary(subTotal: subTotal, tax: tax, total: total),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: OrderSummary(
+              subTotal: subTotal,
+              tax: tax,
+              total: total,
+              cartProduct: cartProduct,
+              paymentMethod: _paymentType,
+              customer: _textCustomerController.text,
+              orderType: _orderType,
+            ),
+          ),
         ],
       ),
     );

@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pos_ai_powered/features/cart/models/cart_product.dart';
 import 'package:pos_ai_powered/features/cart/presentation/widgets/item_transaction_details.dart';
 import 'package:pos_ai_powered/main_screen.dart';
 import 'package:pos_ai_powered/utils/color_constant.dart';
 import 'package:styled_divider/styled_divider.dart';
 
 class SuccessPage extends StatelessWidget {
-  const SuccessPage({super.key});
+  final String paymentMethod;
+  final List<CartProduct> cartProduct;
+  final num subTotal;
+  final num tax;
+  final num total;
+  final String customer;
+  final String orderType;
+  const SuccessPage({
+    super.key,
+    required this.paymentMethod,
+    required this.cartProduct,
+    required this.subTotal,
+    required this.tax,
+    required this.total,
+    required this.customer,
+    required this.orderType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +75,41 @@ class SuccessPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
+                            "Customer",
+                            style: GoogleFonts.plusJakartaSans(),
+                          ),
+                          Text(
+                            customer.toUpperCase(),
+                            style: GoogleFonts.plusJakartaSans(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Order Type",
+                            style: GoogleFonts.plusJakartaSans(),
+                          ),
+                          Text(
+                            orderType.toLowerCase(),
+                            style: GoogleFonts.plusJakartaSans(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
                             "Payment Method",
                             style: GoogleFonts.plusJakartaSans(),
                           ),
                           Text(
-                            "QRIS",
+                            paymentMethod.toUpperCase(),
                             style: GoogleFonts.plusJakartaSans(
                               fontWeight: FontWeight.bold,
                             ),
@@ -129,25 +176,19 @@ class SuccessPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ItemTransactionDetails(
-                        label: "Magic White",
-                        qty: 2,
-                        totalPrice: 60000,
-                      ),
-                      ItemTransactionDetails(
-                        label: "Kopi Susu Tetangga",
-                        qty: 4,
-                        totalPrice: 94000,
-                      ),
-                      ItemTransactionDetails(
-                        label: "Black Summer",
-                        qty: 1,
-                        totalPrice: 25000,
-                      ),
-                      ItemTransactionDetails(
-                        label: "Cappucino",
-                        qty: 3,
-                        totalPrice: 80000,
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: cartProduct.length,
+                        itemBuilder: (context, index) {
+                          final CartProduct cart = cartProduct[index];
+                          return ItemTransactionDetails(
+                            label: cart.product.name,
+                            qty: cart.numOfItem,
+                            totalPrice:
+                                cart.numOfItem * cart.product.price.toDouble(),
+                          );
+                        },
                       ),
                       StyledDivider(
                         lineStyle: DividerLineStyle.dashed,
@@ -162,7 +203,7 @@ class SuccessPage extends StatelessWidget {
                             style: GoogleFonts.plusJakartaSans(),
                           ),
                           Text(
-                            "Rp 400.000",
+                            "Rp $subTotal",
                             style: GoogleFonts.plusJakartaSans(
                               fontWeight: FontWeight.bold,
                             ),
@@ -174,7 +215,7 @@ class SuccessPage extends StatelessWidget {
                         children: [
                           Text("Tax 10%", style: GoogleFonts.plusJakartaSans()),
                           Text(
-                            "Rp 40.000",
+                            "Rp $tax",
                             style: GoogleFonts.plusJakartaSans(
                               fontWeight: FontWeight.bold,
                             ),
@@ -189,7 +230,7 @@ class SuccessPage extends StatelessWidget {
                             style: GoogleFonts.plusJakartaSans(),
                           ),
                           Text(
-                            "Rp 440.000",
+                            "Rp $total",
                             style: GoogleFonts.plusJakartaSans(
                               fontWeight: FontWeight.bold,
                             ),

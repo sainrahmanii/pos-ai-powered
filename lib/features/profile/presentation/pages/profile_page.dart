@@ -1,20 +1,12 @@
+import 'package:flutter/material.dart';
 
-            import 'package:flutter/material.dart';
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
-            class ProfilePage extends StatelessWidget {
-                const ProfilePage({super.key});
+  static const String routeName = '/profile';
 
-                static const String routeName = '/profile';
-
-                @override
-                Widget build(BuildContext context) {
-                    return Scaffold(
-                        appBar: AppBar(
-                            title: const Text('Profile'),
-                        ),
-                        body: const Center(
-                            child: Text('Profile Page'),
-                        ),
-                    );
-                }
-            }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: const Center(child: Text('Profile Page')));
+  }
+}
